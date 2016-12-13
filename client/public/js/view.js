@@ -7,11 +7,15 @@
     let $msg = $('.message');
     let $modalCover = $('.modal-cover');
     let $modalElem = $('.modal');
+    let $searchForm = $('.search');
+    let $searchQuery = $searchForm.find('[name="query"]');
 
     $('.add-job').submit(addJob);
+    $searchForm.submit(searchJobs);
     $jobs.on('click', '.show-detail', showJobDetail);
     $modalElem.on('click', '.close', closeModal);
     $jobs.on('click', '.delete', removeJob);
+    $('.search-icon').click(toggleSearchForm);
 
     $(function() {
         window.jobs.getJobs()
@@ -92,6 +96,43 @@
                 `);
     }
 
+    function toggleSearchForm(e) {
+        e.preventDefault();
+        let right = parseInt($searchForm.css('right'), 10);
+        if (right < 0) {
+            $searchForm.css('right', '1.5em');
+        } else {
+            $searchForm.css('right', '-23.5em');
+        }
+    }
+
+    function searchJobs(e) {
+        e.preventDefault();
+        let query = $searchQuery.val() || null;
+
+        window.jobs.getJobs(query)
+            .then(function(jobs) {
+                jobs.forEach(showJob);
+            })
+            .catch(function(xhr) {
+                showError(`Unable to load jobs (${xhr.status})`);
+            });
+    }
+
+    function showJob(data) {
+        let link = (/^http/.test(data.link)) ? data.link : ('mailto:' + data.link);
+        $jobs.append(`
+            <li>
+                <article data-id='${data.id}'>
+                    <img src='images/detail.png' alt='Detail' title='Show Detail' class='show-detail'>
+                    <p><a href='${link}'>${data.company}</a></p>
+                    <button class='delete'>X</button>
+                </article>
+            </li>
+        `);
+    }
+
+
     function closeModal() {
         $modalElem.hide().find('article').html('');
         $modalCover.hide();
@@ -107,19 +148,6 @@
     function showSuccess(msg) {
         $msg.text(msg).addClass('show success');
         setTimeout(clearMessage, 4500);
-    }
-
-    function showJob(data) {
-        let link = (/^http/.test(data.link)) ? data.link : ('mailto:' + data.link);
-        $jobs.append(`
-            <li>
-                <article data-id='${data.id}'>
-                    <img src='images/detail.png' alt='Detail' title='Show Detail' class='show-detail'>
-                    <p><a href='${link}'>${data.company}</a></p>
-                    <button class='delete'>X</button>
-                </article>
-            </li>
-        `);
     }
 
 })();

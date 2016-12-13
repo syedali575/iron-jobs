@@ -56,12 +56,18 @@
      *
      * @return {Promise}     jQuery XHR Promise
      */
-    function getJobs() {
-        return $.ajax({
+    function getJobs(query) {
+        let options = {
             url: '/api/jobs',
             method: 'get',
             dataType: 'json'
-        });
+        };
+
+        if (query) {
+            options.data = { query: query };
+        }
+
+        return $.ajax(options);
     }
 
     /**
