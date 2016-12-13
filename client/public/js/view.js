@@ -20,6 +20,7 @@
     $(function() {
         window.jobs.getJobs()
             .then(function(jobs) {
+                jobs.html('');
                 jobs.forEach(showJob);
             })
             .catch(function(xhr) {
@@ -112,6 +113,7 @@
 
         window.jobs.getJobs(query)
             .then(function(jobs) {
+                jobs.html('');
                 jobs.forEach(showJob);
             })
             .catch(function(xhr) {
@@ -121,7 +123,7 @@
 
     function showJob(data) {
         let link = (/^http/.test(data.link)) ? data.link : ('mailto:' + data.link);
-        $jobs.append(`
+        $jobs.prepend(`
             <li>
                 <article data-id='${data.id}'>
                     <img src='images/detail.png' alt='Detail' title='Show Detail' class='show-detail'>
