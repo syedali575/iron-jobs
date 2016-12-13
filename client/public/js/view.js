@@ -20,7 +20,7 @@
     $(function() {
         window.jobs.getJobs()
             .then(function(jobs) {
-                jobs.html('');
+                $jobs.html('');
                 jobs.forEach(showJob);
             })
             .catch(function(xhr) {
@@ -83,8 +83,9 @@
         let jobDate = new Date(data.createTime);
         jobDate = `${jobDate.getMonth() + 1}/${jobDate.getDate()}/${jobDate.getFullYear()}`;
 
-        $modalCover.show();
+        $modalCover.height($(document).height()).show();
         $modalElem
+            .css('top', (window.innerHeight * 0.35) + window.scrollY)
             .show()
             .find('article')
                 .html(`
@@ -113,7 +114,7 @@
 
         window.jobs.getJobs(query)
             .then(function(jobs) {
-                jobs.html('');
+                $jobs.html('');
                 jobs.forEach(showJob);
             })
             .catch(function(xhr) {
