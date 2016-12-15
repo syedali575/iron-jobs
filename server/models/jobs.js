@@ -2,7 +2,8 @@ var dbConnect = require('./db-connect.js');
 
 
 module.exports = {
-  getAll
+  getAll,
+  create
 
 };
 
@@ -24,3 +25,15 @@ function getAll(done){
   });
 
 }
+
+  function create(data, done) {
+    dbConnect(function connectionHandeler(err, db){
+      if(err) {
+        done(err, null);
+        return;
+      }
+      data.createTime = Date.now();
+      db.collection('jobs')
+        .insert(data, done);
+    });
+  }
