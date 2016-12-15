@@ -6,6 +6,18 @@
   "scripts": {
     "start": "node ."
   },
-  "author": "TIY DC Cohort",
-  "license": "MIT"
+  "author": "Farimah & Syed",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syedali575/iron-jobs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/syedali575/iron-jobs/issues"
+  },
+  "homepage": "https://github.com/syedali575/iron-jobs#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
 }
