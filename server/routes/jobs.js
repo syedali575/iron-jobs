@@ -29,6 +29,17 @@ router.post('/', function createJob(req, res){
   });
 });
 
+router.get('/:id([a-f0-9]{24})', function getSingleJob(req, res) {
+  jobsModel.getOne(req.params.id, function jobRetrieved(err, data){
+    if(err) {
+      console.error(err);
+      res.status(500).send("Unable to retrieve given job data");
+      return;
+    }
+    res.json(data);
+  });
+});
+
 
 
 
