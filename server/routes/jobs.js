@@ -15,3 +15,5 @@ router.get('/', function allJobs(req, res){
     res.json(data);
   });
 });
+
+module.exports = router;
