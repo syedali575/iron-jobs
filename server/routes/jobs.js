@@ -12,23 +12,9 @@ router.get('/', function allJobs(req, res){
       res.status(500).send("Unable to retrieve jobs data");
       return;
     }
-
-    revisedData = [];
-    data.forEach(function updateData(each) {
-      var newObject = {
-        id: each._id,
-        company: each.company,
-        link: each.link,
-        notes: each.notes,
-        createTime: each.createTime
-      };
-      revisedData.push(newObject);
-    });
-    
-    res.json(revisedData);
+    res.json(data);
   });
 });
-
 
 
 router.post('/', function createJob(req, res){
@@ -40,6 +26,7 @@ router.post('/', function createJob(req, res){
       res.status(500).send("Unable to create job data");
       return;
     }
+    console.log("in router posting data", data);
     res.json(data);
   });
 });
@@ -65,7 +52,5 @@ router.delete('/:id([a-f0-9]{24})', function deleteSingleJob(req, res) {
     res.json(data);
   });
 });
-
-
 
 module.exports = router;
