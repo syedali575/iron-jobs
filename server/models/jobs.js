@@ -54,13 +54,6 @@ function getAll(done){
 
       db.collection('jobs')
         .findOne({ _id: new ObjectID(id) }, function findById(err, data){
-          // newData = {
-          //   'id' = data._id,
-          //   'company' = data.company,
-          //   'notes' = data.notes,
-          //   'link' = data.link,
-          //   'createTime' = data.createTime,
-          // }
           if (err) {
             done(err, null);
             return;

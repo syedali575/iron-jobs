@@ -1,9 +1,12 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-
-
 var server = express();
+
+
+server.use(express.static('client/public'));
+
+
 
 server.set('port', process.env.PORT || 3000);
 
