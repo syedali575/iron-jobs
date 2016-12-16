@@ -10,9 +10,9 @@ module.exports = {
 };
 
 /**
- * get all posted jobs
+ * Get all posted jobs
  * @param  {Function} done called with either error or array of job data
- * @return {[type]}        [description]
+ * @return {Void}        [description]
  */
 function getAll(done){
   dbConnect(function connectionHandeler(err, db){
@@ -28,6 +28,11 @@ function getAll(done){
 
 }
 
+  /**
+   * Create a single job
+   * @param  {Function} done called with either error or array of job data
+   * @return {Void}        [description]
+   */
   function create(data, done) {
     dbConnect(function connectionHandeler(err, db){
       if(err) {

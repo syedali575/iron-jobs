@@ -12,6 +12,28 @@ router.get('/', function allJobs(req, res){
       res.status(500).send("Unable to retrieve jobs data");
       return;
     }
+    // myObject = data[0];
+    // myObjectKeys = Object.keys(myObject);
+    // myObjectKeys.forEach(function(key) {
+    //   if (key === '_id') {
+    //     key = 'id';
+    //     console.log('inside the if statement', key);
+    //   }
+    //   console.log('OUTSIDE the if statement', key);
+    // });
+    // console.log('1111111', data[0]);
+    // data[0] = myObject;
+    // console.log(data[0]);
+    console.log(data);
+    data.forEach(function updateData(each) {
+      var newObject = {
+        id: each._id,
+        company: each.company,
+        link: each.link,
+        notes: each.notes
+      };
+    });
+    console.log(data);
     res.json(data);
   });
 });
