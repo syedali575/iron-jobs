@@ -4,7 +4,8 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports = {
   getAll,
   create,
-  getOne
+  getOne,
+  deleteOne
 
 };
 
@@ -48,6 +49,33 @@ function getAll(done){
 
       db.collection('jobs')
         .findOne({ _id: new ObjectID(id) }, function findById(err, data){
+          // newData = {
+          //   'id' = data._id,
+          //   'company' = data.company,
+          //   'notes' = data.notes,
+          //   'link' = data.link,
+          //   'createTime' = data.createTime,
+          // }
+          if (err) {
+            done(err, null);
+            return;
+          }
+          done(null, data);
+        });
+
+    });
+
+  }
+
+  function deleteOne(id, done){
+    dbConnect(function connectionHandeler(err, db){
+      if(err) {
+        done(err, null);
+        return;
+      }
+
+      db.collection('jobs')
+        .findOneAndDelete({ _id: new ObjectID(id) }, function findById(err, data){
           if (err) {
             done(err, null);
             return;

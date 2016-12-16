@@ -20,7 +20,7 @@ server.get('/', function handleRootRoute(req, res){
   res.send("HIHIHIHI");
 });
 
-server.use('/jobs', require('./routes/jobs.js'));
+server.use('/api/jobs', require('./routes/jobs.js'));
 
 server.listen(server.get('port'), function serverStarted(err) {
     if (err) {

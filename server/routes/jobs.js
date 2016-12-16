@@ -16,16 +16,18 @@ router.get('/', function allJobs(req, res){
   });
 });
 
+
+
 router.post('/', function createJob(req, res){
   console.log(req.body);
 
   jobsModel.create(req.body, function jobCreated(err, data){
-      if (err){
-        console.error(err);
-        res.status(500).send("Unable to create job data");
-        return;
-      }
-      res.json(data);
+    if (err){
+      console.error(err);
+      res.status(500).send("Unable to create job data");
+      return;
+    }
+    res.json(data);
   });
 });
 
@@ -40,7 +42,16 @@ router.get('/:id([a-f0-9]{24})', function getSingleJob(req, res) {
   });
 });
 
-
+router.delete('/:id([a-f0-9]{24})', function deleteSingleJob(req, res) {
+  jobsModel.deleteOne(req.params.id, function jobDeleted(err, data){
+    if(err) {
+      console.error(err);
+      res.status(500).send("Unable to delete given job data");
+      return;
+    }
+    res.json(data);
+  });
+});
 
 
 
